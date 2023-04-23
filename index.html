@@ -1,130 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Rock, Paper, Scissors</title>
-
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
-
-  <script src="./script.js"></script>
-</head>
-<body onload="getScore();">
-  <main>
-    <div class="container container-game fadeIn">
-      <div class="container container-game-header">
-        <h1 id="header-text" class="game-mode-normal"></h1>
-
-        <div class="container container-score">
-          <p id="score-label">SCORE</p>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
     
-          <p id="score-points"></p>
-        </div>
-      </div>
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
 
-      <div class="container container-game-body game-mode-normal" id="game-option-container">
-        <div class="container container-game-option game-option-scissors" id="game-scissors" onclick="playerPicks( 'scissors' )">
-          <img src="./images/icon-scissors.svg" alt="game-selection-scissors">
-        </div>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
 
-        <div class="container container-game-option game-option-spock" id="game-spock" onclick="playerPicks( 'spock' )">
-          <img src="./images/icon-spock.svg" alt="game-selection-spock">
-        </div>
+    <script src="./script.js"></script>
+  </head>
+  <body onload="getScore();">
+    <main>
+      <div class="container container-game fadeIn">
+        <div class="container container-game-header">
+          <h1 id="header-text" class="game-mode-normal"></h1>
 
-        <div class="container container-game-option game-option-paper" id="game-paper" onclick="playerPicks( 'paper' )">
-          <img src="./images/icon-paper.svg" alt="game-selection-paper">
-        </div>
-
-        <div class="container container-game-option game-option-lizard" id="game-lizard" onclick="playerPicks( 'lizard' )">
-          <img src="./images/icon-lizard.svg" alt="game-selection-lizard">
-        </div>
-
-        <div class="container container-game-option game-option-rock" id="game-rock" onclick="playerPicks( 'rock' )">
-          <img src="./images/icon-rock.svg" alt="game-selection-rock">
-        </div>
-
-        <img class="bg-selection bg-outer" id="game-bg-outer" src="" alt="game-selection-bg">
-
-        <img class="bg-selection bg-inner" id="game-bg-inner" src="" alt="game-selection-bg">
-      </div>
-
-      <div class="container container-result fadeOutVanish" id="game-result-container">
-        <div class="container container-matchup">
-          <div class="container container-player-select container-game-picks fadeIn">
-            <div class="container container-game-option game-picks" id="player-select">
-              <img src="./images/icon-rock.svg" alt="game-player-select">
-            </div>
-
-            <p>YOU PICKED</p>
-          </div>
-          
-          <div class="container container-house-select container-game-picks fadeIn">
-            <div class="container container-game-option game-picks" id="house-select">
-              <img src="./images/icon-rock.svg" alt="game-house-select">
-            </div>
-
-            <p>THE HOUSE PICKED</p>
+          <div class="container container-score">
+            <p id="score-label">SCORE</p>
+      
+            <p id="score-points"></p>
           </div>
         </div>
 
-        <div class="container container-verdict fadeIn">
-          <h2 id="result-header">{{}}</h2>
+        <div class="container container-game-body game-mode-normal" id="game-option-container">
+          <div class="container container-game-option game-option-scissors" id="game-scissors" onclick="playerPicks( 'scissors' )">
+            <img src="./images/icon-scissors.svg" alt="game-selection-scissors">
+          </div>
 
-          <button class="btn" onclick="gameRestart();">PLAY AGAIN</button>
+          <div class="container container-game-option game-option-spock" id="game-spock" onclick="playerPicks( 'spock' )">
+            <img src="./images/icon-spock.svg" alt="game-selection-spock">
+          </div>
+
+          <div class="container container-game-option game-option-paper" id="game-paper" onclick="playerPicks( 'paper' )">
+            <img src="./images/icon-paper.svg" alt="game-selection-paper">
+          </div>
+
+          <div class="container container-game-option game-option-lizard" id="game-lizard" onclick="playerPicks( 'lizard' )">
+            <img src="./images/icon-lizard.svg" alt="game-selection-lizard">
+          </div>
+
+          <div class="container container-game-option game-option-rock" id="game-rock" onclick="playerPicks( 'rock' )">
+            <img src="./images/icon-rock.svg" alt="game-selection-rock">
+          </div>
+
+          <img class="bg-selection bg-outer" id="game-bg-outer" src="" alt="game-selection-bg">
+
+          <img class="bg-selection bg-inner" id="game-bg-inner" src="" alt="game-selection-bg">
         </div>
+
+        <div class="container container-result fadeOutVanish" id="game-result-container">
+          <div class="container container-matchup">
+            <div class="container container-player-select container-game-picks fadeIn">
+              <div class="container container-game-option game-picks" id="player-select">
+                <img src="./images/icon-rock.svg" alt="game-player-select">
+              </div>
+
+              <p>YOU PICKED</p>
+            </div>
+            
+            <div class="container container-house-select container-game-picks fadeIn">
+              <div class="container container-game-option game-picks" id="house-select">
+                <img src="./images/icon-rock.svg" alt="game-house-select">
+              </div>
+
+              <p>THE HOUSE PICKED</p>
+            </div>
+          </div>
+
+          <div class="container container-verdict fadeIn">
+            <h2 id="result-header">{{}}</h2>
+
+            <button class="btn" onclick="gameRestart();">PLAY AGAIN</button>
+          </div>
+        </div>
+        
+        <div class="container container-accessibility">
+          <button class="btn game-mode-normal" id="btn-change-mode" onclick="changeGameMode()"></button>
+          <button class="btn" id="btn-rules-open" onclick="showRules()">RULES</button>
+        </div>
+
+        <div class="container container-rules" id="rules">
+          <div class="container container-rules-content">
+            <p>RULES</p>
+
+            <img id="img-rules" class="game-mode-normal" src="./images/image-rules.svg" alt="img-rules">
+
+            <button class="btn" id="btn-rules-close" onclick="hideRules()">✖</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- not part of the challenge-->
+    <footer class="attribution">
+      <span>Challenge by <a href="https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH" target="_blank">Frontend Mentor</a>.</span>
+      
+      <div class="separator"></div>
+      
+      <a href="./design/original" target="_blank">Design Guide - Normal Mode</a>
+      
+      <div class="separator"></div>
+
+      <a href="./design/bonus" target="_blank">Design Guide - Advance Mode</a>
+      
+      <div class="separator"></div>
+      
+      <div class="rating">
+        <span>Difficulty: Advanced</span>
+        <br class="text-cutter">
+        <span>[</span>
+        <div class="rate rate-lit" id="rate-newbie"></div>
+        <div class="rate rate-lit" id="rate-junior"></div>
+        <div class="rate rate-lit" id="rate-intermediate"></div>
+        <div class="rate rate-lit" id="rate-advance"></div>
+        <div class="rate" id="rate-guro"></div>
+        <span>]</span>
       </div>
       
-      <div class="container container-accessibility">
-        <button class="btn game-mode-normal" id="btn-change-mode" onclick="changeGameMode()"></button>
-        <button class="btn" id="btn-rules-open" onclick="showRules()">RULES</button>
-      </div>
-
-      <div class="container container-rules" id="rules">
-        <div class="container container-rules-content">
-          <p>RULES</p>
-
-          <img id="img-rules" class="game-mode-normal" src="./images/image-rules.svg" alt="img-rules">
-
-          <button class="btn" id="btn-rules-close" onclick="hideRules()">✖</button>
-        </div>
-      </div>
-    </div>
-  </main>
-  <!-- not part of the challenge-->
-  <!--<footer class="attribution">
-    <span>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</span>
-    
-    <div class="separator"></div>
-    
-    <a href="./design/desktop-design.jpg" target="_blank">Design Guide - Desktop</a>
-    
-    <div class="separator"></div>
-
-    <a href="./design/mobile-design.jpg" target="_blank">Design Guide - Mobile</a>
-    
-    <div class="separator"></div>
-    
-    <div class="rating">
-      <span>Difficulty: Advanced</span>
-      <br class="text-cutter">
-      <span>[</span>
-      <div class="rate rate-lit" id="rate-newbie"></div>
-      <div class="rate rate-lit" id="rate-junior"></div>
-      <div class="rate rate-lit" id="rate-intermediate"></div>
-      <div class="rate rate-lit" id="rate-advance"></div>
-      <div class="rate" id="rate-guro"></div>
-      <span>]</span>
-    </div>
-    
-    <div class="separator"></div>
-    
-    <span>Coded by <a href="https://github.com/EcePJD">Patrick James O. De Leon</a>.</span>
-  </footer>-->
-</body>
+      <div class="separator"></div>
+      
+      <span>Coded by <a href="https://github.com/EcePJD">Patrick James O. De Leon</a>.</span>
+    </footer>
+  </body>
 </html>

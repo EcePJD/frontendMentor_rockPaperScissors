@@ -742,3 +742,93 @@ main,
     }
 }
 /* MAIN Element - END */
+
+/* FOOTER Element - START */
+/* not part of the challenge */
+.attribution {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+}
+
+.attribution > * {
+    font-size: 0.75em;
+    margin: 0 5px;
+}
+
+.rate {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    background-color: rgb(155, 205, 238);
+    margin: 0 2px;
+    border-radius: 50%;
+}
+
+.rate-lit {
+    background-color: rgb(81, 140, 180);
+}
+
+.separator {
+    display: inline-block;
+    
+    border: solid 2px #597175;
+}
+
+@media only screen and (min-width: 881px) {
+    .text-cutter {
+        display: none;
+    }
+
+    .attribution * {
+        font-size: 0.9em;
+    }
+}
+
+@media only screen and (max-width: 880px) {
+    .attribution * {
+        font-size: 0.75em;
+    }
+
+    .text-cutter {
+        display: inline-block;
+    }
+}
+
+@media only screen and (min-width: 425px) {
+    .attribution {
+        flex-direction: row;
+    }
+    
+    .separator {
+        width: 0;
+        min-height: 15px;
+    }
+}
+
+@media only screen and (max-width: 424px) {
+    .attribution * {
+        font-size: 0.5em;
+    }
+
+    .separator {
+        width: 30px;
+        height: 0;
+        margin: 3px 0;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .attribution {
+        display: none;
+    }
+}
+/* FOOTER Element - END */
