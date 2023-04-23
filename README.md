@@ -24,7 +24,7 @@ This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](h
 - Live Site URL: [Github.io](https://ecepjd.github.io/frontendMentor_rockPaperScissors/)
 
 ## My process
-The first thing that I did was to add my custom footer. Then I made a draft html layout based on the design specification given. Next I commented out the draft html and created a prototype game where instead of cool icons, its just an input field. The purpose of the prototype is to check if the script I made strictly follows the conditions indicated in the rules modal.
+My goal in here is to create the game by only using vanilla CSS and Javascript as a refresher for me. The first thing I did was to create the html structure following some of the propper semantic standards on html. The next thing I did was apply CSS attributess to make it identical to the specification given with the challenge. After those, I started creating a prototype of the game to create and review the script I will be using to decide if the player wins or loses. I used the DOM Manipulation to manipulate the HTML elements together with its animation. After that, alot of testing to ensure that the web app functions correctly.
 
 ### Built with
 - Semantic HTML5 markup
@@ -33,7 +33,7 @@ The first thing that I did was to add my custom footer. Then I made a draft html
 - Javascript
 
 ### What I learned
-
+Not what I learned, but what I reviewed. I used localStorage of the browser to store the score points of the player to make them remember their victorious gap or humiliating gap from a number randomizer script (basically, the player's luck is the main factor of his score). We are getting off track, what I meant to say was that I reviewed the difference between localStorage and sessionStorage. From what I understand, items / data stored in the sessionStorage will only be stored until the browser is closed but in the localStorage, it will only be cleared if the browser's cached was cleared or if the browser had a factory reset.
 
 ## Author
 
