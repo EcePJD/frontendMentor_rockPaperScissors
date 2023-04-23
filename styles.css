@@ -1,0 +1,744 @@
+/* GLOBAL - START */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    height: 100vh;
+    background: radial-gradient(circle at 50% 0%, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+    overflow: hidden;
+}
+
+h1,
+h2,
+p,
+a,
+span,
+select,
+button {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    color: hsl(0, 0%, 100%);
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+
+main,
+.container {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.container-game,
+.container-score {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.fadeOutVanish {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.fadeOut {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.fadeOut .container-game-option {
+    pointer-events: none;
+}
+
+#rules.fadeIn {
+    pointer-events: initial;
+    animation: rulesFadeIn 0.5s ease-in-out forwards;
+}
+
+#rules.fadeOut {
+    pointer-events: none;
+    animation: rulesFadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1 }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeOutVanish {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes rulesFadeIn {
+    from { 
+        opacity: 0;
+        z-index: -1;
+    }
+    to { 
+        opacity: 1;
+        z-index: 4;
+    }
+}
+
+@keyframes rulesFadeOut {
+    from { 
+        opacity: 1;
+        z-index: 4;
+    }
+    to { 
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+@keyframes fadeOutHidden {
+    from { 
+        opacity: 1;
+        z-index: 4;
+    }
+    to { 
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+}
+/* GLOBAL - END */
+
+/* MAIN Element - START */
+.container-game {
+    height: 92vh;
+    width: 84vw;
+    max-width: 800px;
+    justify-content: space-between;
+}
+
+    /* --game header */
+    .container-game-header {
+        border: 3px solid hsl(217, 16%, 45%);
+        border-radius: 10px;
+        width: 100%;
+        height: 15%;
+        justify-content: space-between;
+    }
+
+    #header-text {
+        width: 10%;
+        line-height: 0.8;
+        padding-left: 7%;
+        text-shadow: 5px 5px 4px hsl(0, 0%, 5%);
+    }
+
+    #header-text::after {
+        line-break: strict;
+    }
+
+    h1.game-mode-normal::after {
+        content:'ROCK PAPER SCISSORS';
+        line-break: strict;
+    }
+
+    h1.game-mode-advance::after {
+        content: 'ROCK PAPER SCISSORS LIZARD SPOCK';
+    }
+
+    .container-score {
+        height: 80%;
+        width: 25%;
+        margin-right: 3.5%;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 5px;
+    }
+
+    #score-label {
+        color: hsl(229, 64%, 46%);
+    }
+
+    #score-points {
+        color: hsl(229, 25%, 31%);
+        font-weight: 700;
+        line-height: 1;
+    }
+
+/* --Game Content */
+    /* ---- Content Background */
+    .container-game-body,
+    .container-result {
+        width: 65%;
+        height: auto;
+        min-width: 200px;
+        max-width: 350px;
+        position: relative;
+    }
+
+    .container-game-body > .bg-outer {
+        width: 100%;
+    }
+
+    .container-game-body > .bg-inner {
+        position: absolute;
+        width: 90%;
+    }
+
+    div.game-mode-normal > img {
+        content: url(./images/bg-triangle.svg);
+    }
+
+    div.game-mode-advance > img {
+        content: url(./images/bg-pentagon.svg);
+    }
+
+    .bg-selection {
+        z-index: 1;
+    }
+
+    /* ----Content Selection */
+    .container-game-option {
+        z-index: 2;
+        cursor: pointer;
+        border-radius: 50%;
+        position: absolute;
+        -ms-filter: contrast(100%) blur(0px);
+        -webkit-filter: contrast(100%) blur(0px);
+        filter: contrast(100%) blur(0px);
+        transition: filter 0.25s;
+    }
+
+    .container-game-option:hover {
+        -ms-filter: contrast(50%) blur(50px);
+        -webkit-filter: contrast(50%) blur(50px);
+        filter: contrast(50%) blur(50px);
+        transition: filter 0.25s;
+    }
+
+    .container-game-option::before,
+    .game-picks::after {
+        content: "";
+        background: radial-gradient(circle at 50% 61%,hsl(0, 0%, 100%) 70%, hsl(229, 25%, 82%) 60% );
+        width: 75%;
+        height: 75%;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .container-game-option > img {
+        z-index: 3;
+        width: 35%;
+        max-width: 50px;
+    }
+
+    div.game-mode-normal > div {
+        width: 32vw;
+        height: 32vw;
+        min-width: 120px;
+        min-height: 120px;
+    }
+
+    div.game-mode-normal > #game-spock,
+    div.game-mode-normal > #game-lizard {
+        display: none;
+    }
+
+    div.game-mode-advance > div {
+        width: 24vw;
+        height: 24vw;
+        min-width: 90px;
+        min-height: 90px;
+    }
+
+    div.game-mode-advance > #game-spock,
+    div.game-mode-advance > #game-lizard {
+        display: flex;
+    }
+
+    .game-option-scissors,
+    .picked-scissors::before {
+        background: radial-gradient(circle at 50% 43%, hsl(40, 84%, 53%) 70%, hsla(39, 89%, 49%, 70%) 60% );
+    }
+
+    .game-option-paper,
+    .picked-paper::before {
+        background: radial-gradient(circle at 50% 43%, hsl(230, 89%, 65%) 70%, hsla(230, 89%, 62%, 70%) 60% );
+    }
+
+    .game-option-rock,
+    .picked-rock::before {
+        background: radial-gradient(circle at 50% 43%, hsl(349, 70%, 56%) 70%, hsla(349, 71%, 52%, 70%) 60% );
+    }
+
+    .game-option-lizard,
+    .picked-lizard::before {
+        background: radial-gradient(circle at 50% 43%, hsl(261, 72%, 63%) 70%, hsla(261, 73%, 60%, 70%) 60% );
+    }
+
+    .game-option-spock,
+    .picked-spock::before {
+        background: radial-gradient(circle at 50% 43%, hsl(189, 59%, 53%) 70%, hsla(189, 58%, 57%, 70%) 60% );
+    }
+
+        /* ------ Game Mode: Normal */
+        div.game-mode-normal .container-game-option {
+            max-width: 175px;
+            max-height: 175px;
+        }
+
+        div.game-mode-normal > #game-scissors {
+            top: -23%;
+            right: -25%;
+        }
+
+        div.game-mode-normal > #game-paper {
+            top: -23%;
+            left: -25%;
+        }
+
+        div.game-mode-normal > #game-rock {
+            top: 60%;
+        }
+
+        /* ------ Game Mode: Advance */
+        div.game-mode-advance > .container-game-option {
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        div.game-mode-advance > #game-scissors {
+            top: -20%;
+        }
+
+        div.game-mode-advance > #game-spock {
+            top: 20%;
+            left: -25%;
+        }
+
+        div.game-mode-advance > #game-paper {
+            top: 20%;
+            right: -25%;
+        }
+
+        div.game-mode-advance > #game-lizard {
+            top: 78%;
+            left: -3%;
+        }
+
+        div.game-mode-advance > #game-rock {
+            top: 78%;
+            right: -3%;
+        }
+    
+    /* ----Content Accessibility buttons */
+    .container-accessibility {
+        width: 100%;
+        height: 12%;
+    }
+
+    .btn {
+        color: hsl(0, 0%, 100%);
+        background: none;
+        border: 2px solid hsl(217, 16%, 45%);
+        border-radius: 5px;
+        font-size: 0.9em;
+        line-height: 2.5em;
+        letter-spacing: 0.2em;
+        padding: 0 20px 0 20px;
+        max-width: 200px;
+        cursor: pointer;
+    }
+
+    button.game-mode-normal::after {
+        content: 'ADVANCE MDOE';
+    }
+
+    button.game-mode-advance::after {
+        content: 'NORMAL MDOE';
+    }
+
+    .btn:hover {
+        background-color: hsl(0, 0%, 100%);
+        color: hsl(229, 25%, 31%);
+    }
+
+    .btn:active {
+        background-color: hsl(44, 77%, 51%);
+        color:hsl(0, 0%, 0%);
+    }
+
+    /* ----Content Rules */
+    .container-rules {
+        position: fixed;
+        opacity: 0;
+        z-index: -1;
+        background-color: hsla(0, 0%, 0%, 50%);
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        pointer-events: none;
+    }
+
+    .container-rules-content {
+        background-color: hsl(0, 0%, 100%);
+        flex-direction: column;
+        justify-content: space-evenly;
+        position: relative;
+    }
+
+    .container-rules-content > p {
+        color: hsl(229, 25%, 31%);
+        font-size: 1.75em;
+        font-weight: 800;
+    }
+
+    .container-rules-content > button {
+        height: 50px;
+        color: hsla(217, 16%, 45%, 0.5);
+        border: none;
+        border-radius: 50%;;
+        font-size: 1.5em;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .container-rules-content > .btn:active {
+        background: none;
+    }
+
+    .container-rules-content > img.game-mode-normal {
+        content: url( './images/image-rules.svg' );
+    }
+
+    .container-rules-content > img.game-mode-advance {
+        content: url( './images/image-rules-bonus.svg' );
+    }
+
+    /* ----Result Content */
+    .container-result {
+        width: 100%;
+        height: 65%;
+        max-width: 1000px;
+        flex-direction: column;
+        justify-content: space-between;
+        display: none;
+        opacity: 0;
+    }
+
+    .container-result > div {
+        width: 100%;
+    }
+
+    .container-matchup {
+        height: 70%;
+        justify-content: space-between;
+    }
+
+    .container-matchup > div {
+        opacity: 0;
+    }
+
+    .container-game-picks {
+        width: 45%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .game-picks {
+        width: 50vw;
+        height: 50vw;
+        min-width: 275px;
+        min-height: 275px;
+        position: relative;
+        pointer-events: none;
+    }
+
+    .container-player-select {
+        animation-delay: 0.5s;
+    }
+
+    .container-house-select {
+        animation-delay: 1.5s;
+    }
+
+    .winner-pick {
+        animation: winnerSpotLight 1s ease-in-out forwards;
+        animation-delay: 2s;
+    }
+
+    @keyframes winnerSpotLight {
+        0% {
+            opacity: 1;
+            background: none;
+        } 50% {
+            opacity: 0;
+            background: none;
+        } 60% {
+            opacity: 0;
+            background: repeating-radial-gradient(hsla(217, 16%, 45%, 0.25), hsla(217, 16%, 45%, 0.35) 20%);
+        } 100% {
+            opacity: 1;
+            background: repeating-radial-gradient(hsla(217, 16%, 45%, 0.25), hsla(217, 16%, 45%, 0.35) 20%);
+        }
+    }
+
+    .game-picks::before {
+        width: 50%;
+        height: 50%;
+    }
+
+    .game-picks::after {
+        width: 35%;
+        height: 35%;
+    }
+
+    .game-option-scissors > img,
+    .picked-scissors > img {
+        content: url( './images/icon-scissors.svg' );
+    }
+
+    .game-option-paper > img,
+    .picked-paper > img {
+        content: url( './images/icon-paper.svg' );
+    }
+
+    .game-option-rock > img,
+    .picked-rock > img {
+        content: url( './images/icon-rock.svg' );
+    }
+
+    .game-option-lizard > img,
+    .picked-lizard > img {
+        content: url( './images/icon-lizard.svg' );
+    }
+
+    .game-option-spock > img,
+    .picked-spock > img {
+        content: url( './images/icon-spock.svg' );
+    }
+
+    .game-picks > img {
+        width: 15%;
+        max-width: 100px;
+    }
+
+    .container-game-picks > p {
+        letter-spacing: 1px;
+    }
+
+    .container-verdict {
+        height: 30%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        opacity: 0;
+        animation-delay: 2.5s;
+    }
+
+    .container-verdict > h2 {
+        font-size: 3.5em;
+        letter-spacing: 1px;
+        font-weight: 800;
+    }
+
+    .winner-highlighter {
+        width: 50vw;
+        height: 50vw;
+        background-color: black;
+    }
+
+    .container-verdict > button {
+        padding: 0;
+        width: 75%;
+        height: 35%;
+        max-width: 250px;
+        max-height: 50px;
+    }
+
+    .container-verdict > button:hover {
+        color: hsl(349, 71%, 52%);
+        font-weight: 800;
+    }
+
+/* --Media Query */
+@media only screen  and (max-width: 767px ) {
+    /* ----game header */
+    #header-text {
+        font-size: 1.2em;
+    }
+
+    #score-label {
+        font-size: 0.7em;
+    }
+
+    #score-points {
+        font-size: 2.5em;
+    }
+
+    /* ----game content */
+    .container-game {
+        justify-content: space-between;
+    }
+
+    .bg-outer {
+        width: 65%;
+    }
+
+    .bg-inner {
+        width: 60%;
+    }
+
+    .container-accessibility {
+        position: relative;
+        max-width: 600px;
+        justify-content: space-between;
+    }
+        
+    /* ----Content Rules */
+    .container-rules-content {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .container-rules-content > p {
+        align-self: center;
+        margin: 0; 
+    }
+
+    .container-rules-content > button {
+        position: relative;
+    }
+
+    /* ----Result Content */
+    .container-game-picks {
+        position: relative;
+    }
+
+    .game-picks {
+        max-width: 350px;
+        max-height: 350px;
+    }
+
+    .container-verdict {
+        position: relative;
+    }
+}
+
+@media only screen  and (min-width: 768px ) {
+    /* ----game header */
+    #header-text {
+        font-size: 1.2em;
+        padding-left: 4%;
+    }
+
+    #score-label {
+        font-size: 0.9em;
+    }
+
+    #score-points {
+        font-size: 2.75em;
+    }
+
+    .container-score {
+        height: 80%;
+        width: 15%;
+        max-width: 100px;
+        margin-right: 2%;
+    }
+
+    /* ----game content */
+    .container-game {
+        justify-content: space-between;
+    }
+
+    .container-game-body {
+        bottom: 15%;
+    }
+
+    .bg-outer {
+        width: 100%;
+    }
+
+    .bg-inner {
+        width: 90%;
+    }
+
+    .container-accessibility {
+        position: absolute;
+        height: auto;
+        width: 90vw;
+        justify-content: space-between;
+        bottom: 0;
+    }
+    
+    /* ----Content Rules */
+    .container-rules-content {
+        width: 50vw;
+        height: 50vw;
+        max-width: 400px;
+        max-height: 450px;
+        border-radius: 10px;
+    }
+
+    .container-rules-content > p {
+        align-self: flex-start;
+        margin-left: 8%; 
+    }
+
+    .container-rules-content > button {
+        position: absolute;
+        right: 0;
+        top: 0%;
+    }
+
+    /* ----Result Content */
+    .container-game-picks {
+        position: absolute;
+        flex-direction: column-reverse;
+    }
+
+    .container-matchup {
+        height: 100%;
+        top: -20%;
+    }
+
+    .container-player-select {
+        left: -10%;
+    }
+    .container-house-select {
+        right: -10%;
+    }
+
+    .game-picks {
+        max-width: 440px;
+        max-height: 440px;
+    }
+
+    .container-game-picks > p {
+        font-size: 1.5em;;
+    }
+
+    .container-verdict {
+        position: absolute;
+        top: 15%;
+    }
+}
+/* MAIN Element - END */
