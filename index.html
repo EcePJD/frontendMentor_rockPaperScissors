@@ -19,12 +19,12 @@
     <main>
       <div class="container container-game fadeIn">
         <div class="container container-game-header">
-          <h1 id="header-text" class="game-mode-normal"></h1>
+          <h1 id="header-text" class="game-mode-normal">{{}}</h1>
 
           <div class="container container-score">
             <p id="score-label">SCORE</p>
       
-            <p id="score-points"></p>
+            <p id="score-points">{{}}</p>
           </div>
         </div>
 
@@ -49,9 +49,9 @@
             <img src="./images/icon-rock.svg" alt="game-selection-rock">
           </div>
 
-          <img class="bg-selection bg-outer" id="game-bg-outer" src="" alt="game-selection-bg">
+          <img class="bg-selection bg-outer" id="game-bg-outer" src="./images/bg-triangle.svg" alt="game-selection-bg">
 
-          <img class="bg-selection bg-inner" id="game-bg-inner" src="" alt="game-selection-bg">
+          <img class="bg-selection bg-inner" id="game-bg-inner" src="./images/bg-pentagon.svg" alt="game-selection-bg">
         </div>
 
         <div class="container container-result fadeOutVanish" id="game-result-container">
@@ -81,7 +81,7 @@
         </div>
         
         <div class="container container-accessibility">
-          <button class="btn game-mode-normal" id="btn-change-mode" onclick="changeGameMode()"></button>
+          <button class="btn game-mode-normal" id="btn-change-mode" onclick="changeGameMode()">{{}}</button>
           <button class="btn" id="btn-rules-open" onclick="showRules()">RULES</button>
         </div>
 
